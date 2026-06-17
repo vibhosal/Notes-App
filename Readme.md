@@ -42,6 +42,14 @@ notes-app/
 │
 ├── client/
 │   ├── src/
+│   │   ├── App.jsx
+│   │   ├── main.jsx
+│   │   ├── styles.css
+│   │   └── components/
+│   │       ├── NotesList.jsx
+│   │       ├── NoteCard.jsx
+│   │       ├── NoteForm.jsx
+│   │       └── EditNoteModal.jsx
 │   └── public/
 │
 ├── server/
@@ -53,6 +61,25 @@ notes-app/
 ├── .gitignore
 ├── README.md
 └── package.json
+```
+
+---
+
+## Client Setup
+
+From the `Notes-App` folder:
+
+```bash
+cd client
+npm install
+npm run dev
+```
+
+The frontend expects the backend API at `http://localhost:5000/api/notes`.
+Create a `client/.env` file to override the API base URL:
+
+```ini
+VITE_API_BASE=http://localhost:5000/api/notes
 ```
 
 ---
