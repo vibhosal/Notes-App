@@ -33,9 +33,9 @@ export default function NoteForm({ onSubmit }) {
         <textarea name="content" value={form.content} onChange={handleChange} placeholder="Write your note..." rows="6" />
       </label>
       <label>
-        Priority-type
+        Priority-type-is
         <select name="priority" value={form.priority} onChange={handleChange}>
-          <option value="high">High</option>
+          <option value="high">High priority</option>
           <option value="medium">Medium</option>
           <option value="low">Low</option>
         </select>
