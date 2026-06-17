@@ -63,7 +63,7 @@ function App() {
         ...updated,
         updatedAt: new Date().toISOString(),
       });
-      setNotes((current) => current.map((note) => (note._id === id ? response.data : note)));
+      setNotes((current) => current.map((note) => (note.id === id ? response.data : note)));
       setSelectedNote(null);
     } catch (err) {
       setError('Failed to update note.');
@@ -73,7 +73,7 @@ function App() {
   const handleDelete = async (id) => {
     try {
       await axios.delete(`${API_BASE}/${id}`);
-      setNotes((current) => current.filter((note) => note._id !== id));
+      setNotes((current) => current.filter((note) => note.id !== id));
     } catch (err) {
       setError('Failed to delete note.');
     }
