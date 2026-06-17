@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const initialForm = { title: '', content: '' };
+const initialForm = { title: '', content: '', priority: 'medium' };
 
 export default function NoteForm({ onSubmit }) {
   const [form, setForm] = useState(initialForm);
@@ -13,7 +13,7 @@ export default function NoteForm({ onSubmit }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!form.title.trim() || !form.content.trim()) return;
-    onSubmit({ title: form.title.trim(), content: form.content.trim() });
+    onSubmit({ title: form.title.trim(), content: form.content.trim(), priority: form.priority });
     setForm(initialForm);
   };
 
@@ -23,6 +23,15 @@ export default function NoteForm({ onSubmit }) {
       <label>
         Title
         <input name="title" value={form.title} onChange={handleChange} placeholder="Note title" />
+      </label>
+      <label>
+        Priority
+        <select name="priority" value={form.priority} onChange={handleChange}>
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+          <option value="urgent">Urgent</option>
+        </select>
       </label>
       <label>
         Content
