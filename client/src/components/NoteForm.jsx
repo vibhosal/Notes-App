@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const initialForm = { title: '', content: '' };
+const initialForm = { title: '', content: '', category: 'general' };
 
 export default function NoteForm({ onSubmit }) {
   const [form, setForm] = useState(initialForm);
@@ -13,7 +13,7 @@ export default function NoteForm({ onSubmit }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!form.title.trim() || !form.content.trim()) return;
-    onSubmit({ title: form.title.trim(), content: form.content.trim() });
+    onSubmit({ title: form.title.trim(), content: form.content.trim(), category: form.category });
     setForm(initialForm);
   };
 
@@ -23,6 +23,15 @@ export default function NoteForm({ onSubmit }) {
       <label>
         Title
         <input name="title" value={form.title} onChange={handleChange} placeholder="Note title" />
+      </label>
+      <label>
+        Category
+        <select name="category" value={form.category} onChange={handleChange}>
+          <option value="general">General</option>
+          <option value="work">Work</option>
+          <option value="personal">Personal</option>
+          <option value="ideas">Ideas</option>
+        </select>
       </label>
       <label>
         Content
