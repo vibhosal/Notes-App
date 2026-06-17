@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const initialForm = { title: '', content: '' };
+const initialForm = { title: '', content: '', priority: 'medium' };
 
 export default function NoteForm({ onSubmit }) {
   const [form, setForm] = useState(initialForm);
@@ -13,7 +13,11 @@ export default function NoteForm({ onSubmit }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!form.title.trim() || !form.content.trim()) return;
-    onSubmit({ title: form.title.trim(), content: form.content.trim() });
+    onSubmit({
+      title: form.title.trim(),
+      content: form.content.trim(),
+      priority: form.priority,
+    });
     setForm(initialForm);
   };
 
@@ -27,6 +31,14 @@ export default function NoteForm({ onSubmit }) {
       <label>
         Content
         <textarea name="content" value={form.content} onChange={handleChange} placeholder="Write your note..." rows="6" />
+      </label>
+      <label>
+        Priority
+        <select name="priority" value={form.priority} onChange={handleChange}>
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
       </label>
       <button type="submit">Add Note</button>
     </form>

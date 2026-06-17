@@ -1,7 +1,11 @@
 import { useState } from 'react';
 
 export default function EditNoteModal({ note, onClose, onSave }) {
-  const [form, setForm] = useState({ title: note.title, content: note.content });
+  const [form, setForm] = useState({
+    title: note.title,
+    content: note.content,
+    priority: note.priority || 'medium',
+  });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -10,7 +14,11 @@ export default function EditNoteModal({ note, onClose, onSave }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSave(note.id, { title: form.title.trim(), content: form.content.trim() });
+    onSave(note.id, {
+      title: form.title.trim(),
+      content: form.content.trim(),
+      priority: form.priority,
+    });
   };
 
   return (
@@ -31,6 +39,14 @@ export default function EditNoteModal({ note, onClose, onSave }) {
           <label>
             Content
             <textarea name="content" value={form.content} onChange={handleChange} rows="6" />
+          </label>
+          <label>
+            Priority
+            <select name="priority" value={form.priority} onChange={handleChange}>
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
           </label>
           <div className="modal-actions">
             <button type="button" className="secondary" onClick={onClose}>
