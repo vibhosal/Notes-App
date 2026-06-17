@@ -10,7 +10,7 @@ export default function EditNoteModal({ note, onClose, onSave }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSave(note._id, { title: form.title.trim(), content: form.content.trim() });
+    onSave(note.id, { title: form.title.trim(), content: form.content.trim() });
   };
 
   return (

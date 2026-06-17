@@ -4,7 +4,7 @@ import NotesList from './components/NotesList';
 import NoteForm from './components/NoteForm';
 import EditNoteModal from './components/EditNoteModal';
 
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000/api/notes';
+const API_BASE = import.meta.env.VITE_API_BASE || '/api/notes';
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -32,7 +32,12 @@ function App() {
 
   const handleCreate = async (note) => {
     try {
-      const response = await axios.post(API_BASE, note);
+      const timestamp = new Date().toISOString();
+      const response = await axios.post(API_BASE, {
+        ...note,
+        createdAt: timestamp,
+        updatedAt: timestamp,
+      });
       setNotes((current) => [response.data, ...current]);
     } catch (err) {
       setError('Failed to create note.');
@@ -41,8 +46,11 @@ function App() {
 
   const handleUpdate = async (id, updated) => {
     try {
-      const response = await axios.put(`${API_BASE}/${id}`, updated);
-      setNotes((current) => current.map((note) => (note._id === id ? response.data : note)));
+      const response = await axios.put(`${API_BASE}/${id}`, {
+        ...updated,
+        updatedAt: new Date().toISOString(),
+      });
+      setNotes((current) => current.map((note) => (note.id === id ? response.data : note)));
       setSelectedNote(null);
     } catch (err) {
       setError('Failed to update note.');
@@ -52,7 +60,7 @@ function App() {
   const handleDelete = async (id) => {
     try {
       await axios.delete(`${API_BASE}/${id}`);
-      setNotes((current) => current.filter((note) => note._id !== id));
+      setNotes((current) => current.filter((note) => note.id !== id));
     } catch (err) {
       setError('Failed to delete note.');
     }
