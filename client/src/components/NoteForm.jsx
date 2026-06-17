@@ -36,9 +36,9 @@ export default function NoteForm({ onSubmit }) {
         Priority-type-is
         <select name="priority" value={form.priority} onChange={handleChange}>
           <option value="high">High priority</option>
-          <option value="medium">Medium</option>
+          <option value="medium">Medium prio</option>
           <option value="low">Low</option>
-        </select>
+        </select>s
       </label>
       <button type="submit">Add Note</button>
     </form>
