@@ -1,8 +1,42 @@
 :root {
   color-scheme: light;
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: #f6f7fb;
-  color: #1f2937;
+  --bg: #f6f7fb;
+  --body-bg: radial-gradient(circle at top, #fdf8ff, #eef2ff 40%);
+  --surface: #ffffff;
+  --surface-strong: #f8fbff;
+  --surface-border: rgba(148, 163, 184, 0.15);
+  --surface-border-strong: rgba(148, 163, 184, 0.18);
+  --text: #1f2937;
+  --muted: #4b5563;
+  --muted-strong: #475569;
+  --accent: #4f46e5;
+  --accent-strong: #4338ca;
+  --secondary: #6b7280;
+  --danger: #dc2626;
+  --danger-soft: #fca5a5;
+  --shadow: 0 20px 60px rgba(15, 23, 42, 0.06);
+  --shadow-strong: 0 28px 70px rgba(15, 23, 42, 0.2);
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0f172a;
+  --body-bg: radial-gradient(circle at top, #111827 0%, #0b1123 50%);
+  --surface: #111827;
+  --surface-strong: #1e293b;
+  --surface-border: rgba(148, 163, 184, 0.1);
+  --surface-border-strong: rgba(148, 163, 184, 0.16);
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --muted-strong: #cbd5e1;
+  --accent: #8b5cf6;
+  --accent-strong: #7c3aed;
+  --secondary: #64748b;
+  --danger: #f87171;
+  --danger-soft: #fee2e2;
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  --shadow-strong: 0 28px 70px rgba(0, 0, 0, 0.55);
 }
 
 * {
@@ -12,7 +46,8 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: radial-gradient(circle at top, #fdf8ff, #eef2ff 40%);
+  background: var(--body-bg);
+  color: var(--text);
 }
 
 button,
@@ -32,19 +67,28 @@ button {
 }
 
 header {
-  text-align: center;
   margin-bottom: 32px;
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  text-align: start;
 }
 
 header h1 {
   margin: 0;
   font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--text);
 }
 
 header p {
-  margin: 12px auto 0;
+  margin: 12px 0 0;
   max-width: 640px;
-  color: #4b5563;
+  color: var(--muted);
 }
 
 main {
@@ -53,11 +97,11 @@ main {
 }
 
 .panel {
-  background: #ffffff;
-  border: 1px solid rgba(148, 163, 184, 0.15);
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
   border-radius: 24px;
   padding: 24px;
-  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.06);
+  box-shadow: var(--shadow);
 }
 
 .notes-header {
@@ -73,6 +117,7 @@ main {
   display: grid;
   gap: 8px;
   margin-bottom: 16px;
+  color: var(--text);
 }
 
 .note-form input,
@@ -80,10 +125,18 @@ main {
 .note-form textarea,
 .modal textarea {
   width: 100%;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--surface-border);
   border-radius: 14px;
   padding: 12px 14px;
-  background: #f9fafb;
+  background: var(--surface-strong);
+  color: var(--text);
+}
+
+.note-form input::placeholder,
+.modal input::placeholder,
+.note-form textarea::placeholder,
+.modal textarea::placeholder {
+  color: var(--muted);
 }
 
 .note-form button,
@@ -94,7 +147,7 @@ main {
   padding: 12px 18px;
   min-width: 100px;
   color: #ffffff;
-  background: #4f46e5;
+  background: var(--accent);
   transition: transform 0.2s ease, background 0.2s ease;
 }
 
@@ -102,14 +155,20 @@ main {
 .modal button:hover,
 .note-card button:hover {
   transform: translateY(-1px);
+  background: var(--accent-strong);
 }
 
 button.secondary {
-  background: #6b7280;
+  background: var(--secondary);
 }
 
 button.danger {
-  background: #dc2626;
+  background: var(--danger);
+}
+
+button.theme-toggle {
+  background: var(--secondary);
+  color: #ffffff;
 }
 
 .note-form {
@@ -119,6 +178,7 @@ button.danger {
 .note-form h2,
 .modal header h2 {
   margin-top: 0;
+  color: var(--text);
 }
 
 .notes-grid {
@@ -129,24 +189,25 @@ button.danger {
 .note-card {
   padding: 20px;
   border-radius: 20px;
-  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
-  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: linear-gradient(180deg, var(--surface) 0%, var(--surface-strong) 100%);
+  border: 1px solid var(--surface-border-strong);
 }
 
 .note-card h3 {
   margin: 0 0 10px;
+  color: var(--text);
 }
 
 .note-card p {
   margin: 0 0 18px;
-  color: #475569;
+  color: var(--muted-strong);
   line-height: 1.65;
 }
 
 .note-meta {
   display: flex;
   justify-content: flex-end;
-  color: #6b7280;
+  color: var(--muted);
   font-size: 0.9rem;
   margin-bottom: 10px;
 }
@@ -162,15 +223,16 @@ button.danger {
 .toast {
   padding: 18px;
   border-radius: 18px;
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  background: #ffffff;
+  border: 1px solid var(--surface-border-strong);
+  background: var(--surface);
+  color: var(--text);
 }
 
 .toast.error {
   margin-bottom: 18px;
-  border-color: #fca5a5;
-  background: #fef2f2;
-  color: #b91c1c;
+  border-color: var(--danger-soft);
+  background: rgba(254, 226, 226, 0.18);
+  color: var(--danger);
 }
 
 .modal-backdrop {
@@ -184,10 +246,10 @@ button.danger {
 
 .modal {
   width: min(100%, 540px);
-  background: #ffffff;
+  background: var(--surface);
   border-radius: 24px;
   padding: 24px;
-  box-shadow: 0 28px 70px rgba(15, 23, 42, 0.2);
+  box-shadow: var(--shadow-strong);
 }
 
 .modal header {
@@ -202,7 +264,7 @@ button.danger {
   border: none;
   background: transparent;
   font-size: 1.5rem;
-  color: #475569;
+  color: var(--muted-strong);
 }
 
 .modal-actions {
