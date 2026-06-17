@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const initialForm = { title: '', content: '', priority: 'medium' };
+const initialForm = { title: '', content: '', priority: 'medium', category: 'general' };
 
 export default function NoteForm({ onSubmit }) {
   const [form, setForm] = useState(initialForm);
@@ -13,10 +13,11 @@ export default function NoteForm({ onSubmit }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!form.title.trim() || !form.content.trim()) return;
-    onSubmit({
-      title: form.title.trim(),
-      content: form.content.trim(),
+    onSubmit({ 
+      title: form.title.trim(), 
+      content: form.content.trim(), 
       priority: form.priority,
+      category: form.category 
     });
     setForm(initialForm);
   };
@@ -29,16 +30,26 @@ export default function NoteForm({ onSubmit }) {
         <input name="title" value={form.title} onChange={handleChange} placeholder="Note title" />
       </label>
       <label>
-        Content
-        <textarea name="content" value={form.content} onChange={handleChange} placeholder="Write your note..." rows="6" />
+        Priority
+        <select name="priority" value={form.priority} onChange={handleChange}>
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+          <option value="urgent">Urgent</option>
+        </select>
       </label>
       <label>
-        Priority-type-is
-        <select name="priority" value={form.priority} onChange={handleChange}>
-          <option value="high">High priority</option>
-          <option value="medium">Medium prio</option>
-          <option value="low">Low</option>
-        </select>s
+        Category
+        <select name="category" value={form.category} onChange={handleChange}>
+          <option value="general">General</option>
+          <option value="work">Work</option>
+          <option value="personal">Personal</option>
+          <option value="ideas">Ideas</option>
+        </select>
+      </label>
+      <label>
+        Content
+        <textarea name="content" value={form.content} onChange={handleChange} placeholder="Write your note..." rows="6" />
       </label>
       <button type="submit">Add Note</button>
     </form>
