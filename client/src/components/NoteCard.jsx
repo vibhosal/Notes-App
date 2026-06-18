@@ -18,7 +18,7 @@ export default function NoteCard({ note, onEdit, onDelete }) {
 
       <div className="actions">
         <button type="button" onClick={() => onEdit(note)}>
-          Edit
+          Edit content
         </button>
         <button type="button" className="danger" onClick={() => onDelete(note.id)}>
           Delete
