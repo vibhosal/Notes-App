@@ -48,7 +48,7 @@ export default function NoteForm({ onSubmit }) {
         </select>
       </label>
       <label>
-        Content
+        Content of notes
         <textarea name="content" value={form.content} onChange={handleChange} placeholder="Write your note..." rows="6" />
       </label>
       <button type="submit">Add Note</button>
