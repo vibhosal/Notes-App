@@ -14,14 +14,15 @@ export default function NoteCard({ note, onEdit, onDelete }) {
         <span>{new Date(note.updatedAt || note.createdAt).toLocaleDateString()}</span>
       </div>
       <h3>{note.title}</h3>
+      <p>add content</p>
       <p>{note.content}</p>
 
       <div className="actions">
         <button type="button" onClick={() => onEdit(note)}>
-          Edit
+          Edit item
         </button>
         <button type="button" className="danger" onClick={() => onDelete(note.id)}>
-          Delete
+          Delete item
         </button>
       </div>
     </article>
