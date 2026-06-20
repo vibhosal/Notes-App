@@ -32,11 +32,11 @@ export default function NoteForm({ onSubmit }) {
       <label>
         Priority
         <select name="priority" value={form.priority} onChange={handleChange}>
-          <option value="low">VeryLow</option>
+          <option value="low">Very Low</option>
             <option value="low">Low</option>
           <option value="medium">Medium</option>
           <option value="high">High</option>
-          <option value="urgent">Urgent</option>
+          <option value="urgent">Urgent Priority</option>
         </select>
       </label>
       <label>
